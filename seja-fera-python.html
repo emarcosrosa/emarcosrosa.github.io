@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Seja Fera em Python | Fundamentos da Linguagem Python</title>
+
+  <meta name="description" content="Seja Fera em Python foi desenvolvido para quem deseja dar os primeiros passos na programação de forma prática, organizada e objetiva. Aprenda Python do zero.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Marcos Rosa">
+
+  <link rel="canonical" href="https://emarcosrosa.github.io/seja-fera-python.html">
+
+  <meta property="og:type" content="book">
+  <meta property="og:title" content="Seja Fera em Python | Fundamentos da Linguagem Python">
+  <meta property="og:description" content="Aprenda programação do zero com Python de forma prática, organizada e objetiva.">
+  <meta property="og:url" content="https://emarcosrosa.github.io/seja-fera-python.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JT2KFQZ5NT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JT2KFQZ5NT');
+  </script>
+
+  <style>
+    :root {
+      --python-blue: #3776ab;
+      --python-dark: #0c2945;
+      --python-yellow: #ffd43b;
+      --yellow-dark: #d7ad00;
+      --navy: #071a2b;
+      --text: #17212b;
+      --muted: #637181;
+      --bg: #f5f7fa;
+      --white: #ffffff;
+      --border: #e3e8ee;
+      --green: #16834a;
+      --shadow: 0 18px 45px rgba(7, 26, 43, .12);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      background: rgba(255, 255, 255, .96);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .book-title-header {
+      font-size: .92rem;
+      font-weight: 800;
+      color: var(--python-dark);
+    }
+
+    .header-button {
+      background: var(--python-blue);
+      color: #fff;
+      padding: 10px 17px;
+      border-radius: 9px;
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background:
+        radial-gradient(circle at 80% 15%, rgba(55,118,171,.38), transparent 30%),
+        linear-gradient(135deg, #061728, #103c61);
+      color: white;
+      padding: 78px 0 88px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      align-items: center;
+      gap: 75px;
+    }
+
+    .cover-area {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: rgba(55,118,171,.4);
+      border-radius: 50%;
+      filter: blur(70px);
+    }
+
+    .cover {
+      position: relative;
+      width: min(330px, 82%);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 25px 30px 65px rgba(0,0,0,.42);
+      transform: rotate(1.5deg);
+    }
+
+    .cover-placeholder {
+      display: none;
+      position: relative;
+      width: min(330px, 82%);
+      aspect-ratio: 2 / 3;
+      padding: 32px;
+      background: linear-gradient(145deg, #3776ab, #092744);
+      border-radius: 5px;
+      box-shadow: 25px 30px 65px rgba(0,0,0,.42);
+    }
+
+    .cover-placeholder strong {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .cover-placeholder small {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+      color: #e4f1fb;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      color: #d9eafb;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 5.5vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin-bottom: 14px;
+    }
+
+    h1 span {
+      color: var(--python-yellow);
+    }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      color: #dce8f2;
+      margin-bottom: 22px;
+    }
+
+    .hero-text {
+      max-width: 660px;
+      color: #c4d2df;
+      font-size: 1.04rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      min-height: 49px;
+      padding: 0 22px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--python-yellow);
+      color: #111827;
+      box-shadow: 0 10px 25px rgba(255,212,59,.18);
+    }
+
+    .btn-secondary {
+      color: white;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    /* =========================
+       QUICK INFO
+    ========================= */
+
+    .quick-info {
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .quick-item {
+      padding: 25px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .quick-item:last-child {
+      border-right: 0;
+    }
+
+    .quick-item strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .quick-item span {
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    /* =========================
+       VISÃO GERAL
+    ========================= */
+
+    .overview {
+      background: white;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .overview-text h2 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .overview-text p {
+      color: var(--muted);
+      margin-bottom: 17px;
+    }
+
+    .highlight {
+      margin-top: 25px;
+      padding: 22px;
+      border-left: 4px solid var(--python-yellow);
+      border-radius: 0 12px 12px 0;
+      background: #fff9dd;
+      color: #3c3a2e;
+      font-weight: 600;
+    }
+
+    .python-card {
+      background: #0a1725;
+      border-radius: var(--radius);
+      padding: 30px;
+      color: #dbe8f4;
+      box-shadow: var(--shadow);
+    }
+
+    .terminal {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 25px;
+    }
+
+    .terminal span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #657586;
+    }
+
+    .python-card pre {
+      font: 500 .9rem/1.8 ui-monospace, SFMono-Regular, Consolas, monospace;
+      white-space: pre-wrap;
+    }
+
+    .pink { color: #ff79c6; }
+    .green { color: #50fa7b; }
+    .yellow { color: #f1fa8c; }
+    .blue-code { color: #8be9fd; }
+
+    /* =========================
+       O QUE VOCÊ VAI APRENDER
+    ========================= */
+
+    .learning {
+      background: var(--bg);
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .learning-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 17px 18px;
+      font-weight: 700;
+      font-size: .91rem;
+      box-shadow: 0 5px 18px rgba(10,30,50,.035);
+    }
+
+    .learning-item::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+      margin-right: 9px;
+    }
+
+    /* =========================
+       PARA QUEM É
+    ========================= */
+
+    .audience {
+      background: white;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .audience-card {
+      padding: 23px 17px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .audience-icon {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 13px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #eaf4fb;
+      color: var(--python-blue);
+      font-weight: 900;
+    }
+
+    .audience-card h3 {
+      font-size: .95rem;
+      line-height: 1.3;
+    }
+
+    /* =========================
+       METODOLOGIA / DIFERENCIAIS
+    ========================= */
+
+    .features {
+      background: var(--bg);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature {
+      padding: 29px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .feature-number {
+      font-size: .78rem;
+      font-weight: 900;
+      color: var(--python-blue);
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    /* =========================
+       AUTOR
+    ========================= */
+
+    .author {
+      background: #eaf2f7;
+    }
+
+    .author-box {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .author-box h2 {
+      margin-bottom: 13px;
+    }
+
+    .author-box p {
+      color: var(--muted);
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      color: white;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(55,118,171,.35), transparent 35%),
+        linear-gradient(135deg, #061728, #103c61);
+    }
+
+    .cta h2 {
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.12;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      color: #c7d6e4;
+    }
+
+    .cta-note {
+      margin-top: 15px;
+      font-size: .76rem;
+      color: #aebdca;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #061321;
+      color: #aebdcc;
+      padding: 27px 0;
+      text-align: center;
+      font-size: .8rem;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .learning-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .audience-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header-button {
+        display: none;
+      }
+
+      .hero {
+        padding: 58px 0 68px;
+      }
+
+      .quick-grid,
+      .learning-grid,
+      .audience-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .quick-item:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="book-title-header">
+      Seja Fera em Python — Fundamentos da Linguagem Python
+    </div>
+
+    <a
+      class="header-button amazon-link"
+      data-position="header"
+      href="https://www.amazon.com.br/Seja-fera-Python-Fundamentos-Linguagem-ebook/dp/B0HB7S9XJR/"
+      target="_blank"
+      rel="noopener noreferrer sponsored">
+      Comprar na Amazon →
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+
+      <div class="cover-area">
+
+        <div class="cover-glow"></div>
+
+        <img
+          class="cover"
+          src="capa.jpg"
+          alt="Capa do livro Seja Fera em Python — Fundamentos da Linguagem Python"
+          onerror="
+            this.style.display='none';
+            document.querySelector('.cover-placeholder').style.display='block';
+          "
+        >
+
+        <div class="cover-placeholder">
+          <strong>SEJA FERA<br>EM PYTHON</strong>
+          <small>
+            Fundamentos da Linguagem Python<br><br>
+            Marcos Rosa
+          </small>
+        </div>
+
+      </div>
+
+      <div class="hero-copy">
+
+        <span class="eyebrow">Fundamentos da Linguagem Python</span>
+
+        <h1>
+          Seja Fera em <span>Python</span>
+        </h1>
+
+        <div class="hero-subtitle">
+          Aprenda programação de forma prática, organizada e objetiva.
+        </div>
+
+        <p class="hero-text">
+          Aprender programação não precisa ser complicado. Este livro foi
+          desenvolvido para quem deseja dar os primeiros passos na
+          programação utilizando Python, com linguagem clara e exemplos
+          do cotidiano.
+        </p>
+
+        <div class="buttons">
+
+          <a
+            class="btn btn-primary amazon-link"
+            data-position="hero"
+            href="https://www.amazon.com.br/Seja-fera-Python-Fundamentos-Linguagem-ebook/dp/B0HB7S9XJR/"
+            target="_blank"
+            rel="noopener noreferrer sponsored">
+            Comprar na Amazon →
+          </a>
+
+          <a class="btn btn-secondary" href="#visao-geral">
+            Conhecer o livro
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUICK INFO -->
+  <section class="quick-info">
+    <div class="container quick-grid">
+
+      <div class="quick-item">
+        <strong>Do zero</strong>
+        <span>Primeiros passos na programação</span>
+      </div>
+
+      <div class="quick-item">
+        <strong>Python</strong>
+        <span>Uma das linguagens mais utilizadas no mundo</span>
+      </div>
+
+      <div class="quick-item">
+        <strong>Prática</strong>
+        <span>Exemplos, exercícios, desafios e boas práticas</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VISÃO GERAL -->
+  <section class="overview" id="visao-geral">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Visão geral do livro</h2>
+        <p>
+          Uma introdução aos fundamentos da programação com Python,
+          pensada para tornar o aprendizado mais claro e acessível.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+
+        <div class="overview-text">
+
+          <h2>Aprender programação não precisa ser complicado.</h2>
+
+          <p>
+            <strong>Seja Fera em Python</strong> foi desenvolvido para quem
+            deseja dar os primeiros passos na programação de forma prática,
+            organizada e objetiva.
+          </p>
+
+          <p>
+            Utilizando uma linguagem clara e exemplos do cotidiano, o livro
+            apresenta os fundamentos da linguagem Python, uma das tecnologias
+            mais utilizadas no mundo em áreas como desenvolvimento de software,
+            ciência de dados, automação, inteligência artificial e computação
+            em nuvem.
+          </p>
+
+          <p>
+            Ao longo dos capítulos, o leitor aprenderá os principais conceitos
+            da programação, desde a instalação do ambiente até a criação de
+            programas completos utilizando estruturas de decisão, repetição,
+            funções, coleções de dados e manipulação de arquivos.
+          </p>
+
+          <div class="highlight">
+            Cada capítulo apresenta exemplos comentados, exercícios propostos,
+            desafios e boas práticas de programação para consolidar o aprendizado.
+          </div>
+
+        </div>
+
+        <div class="python-card">
+
+          <div class="terminal">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+<pre><span class="pink">def</span> <span class="green">aprender_python</span>():
+    linguagem = <span class="yellow">"Python"</span>
+    objetivo = <span class="yellow">"aprender programação"</span>
+
+    <span class="pink">return</span> (
+        linguagem,
+        objetivo
+    )
+
+<span class="blue-code">print</span>(aprender_python())</pre>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APRENDIZADO -->
+  <section class="learning">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Neste livro você aprenderá</h2>
+        <p>
+          Os principais fundamentos necessários para começar a programar
+          com Python e desenvolver seus primeiros programas.
+        </p>
+      </div>
+
+      <div class="learning-grid">
+
+        <div class="learning-item">Lógica de programação</div>
+        <div class="learning-item">Sintaxe da linguagem Python</div>
+        <div class="learning-item">Variáveis e tipos de dados</div>
+        <div class="learning-item">Operadores</div>
+        <div class="learning-item">Entrada e saída de dados</div>
+        <div class="learning-item">Estruturas condicionais</div>
+        <div class="learning-item">Estruturas de repetição</div>
+        <div class="learning-item">Funções</div>
+        <div class="learning-item">Listas, tuplas, conjuntos e dicionários</div>
+        <div class="learning-item">Manipulação de arquivos</div>
+        <div class="learning-item">Tratamento de exceções</div>
+        <div class="learning-item">Organização de projetos</div>
+        <div class="learning-item">Boas práticas de programação</div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="audience">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Ideal para</h2>
+        <p>
+          O livro foi pensado para diferentes perfis de pessoas
+          que desejam aprender programação do zero.
+        </p>
+      </div>
+
+      <div class="audience-grid">
+
+        <article class="audience-card">
+          <div class="audience-icon">EM</div>
+          <h3>Estudantes do ensino médio</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">T</div>
+          <h3>Estudantes de cursos técnicos</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">S</div>
+          <h3>Estudantes do ensino superior</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">A</div>
+          <h3>Autodidatas</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">P</div>
+          <h3>Professores</h3>
+        </article>
+
+      </div>
+
+      <div style="max-width: 700px; margin: 22px auto 0; text-align:center;">
+        <div class="audience-card">
+          <div class="audience-icon">C</div>
+          <h3>Profissionais em transição de carreira e qualquer pessoa que queira aprender programação do zero</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="features">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Um aprendizado pensado para a prática</h2>
+        <p>
+          O conteúdo combina fundamentos, prática e atividades para
+          ajudar a consolidar o conhecimento.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <article class="feature">
+          <div class="feature-number">01 — EXEMPLOS</div>
+          <h3>Exemplos comentados</h3>
+          <p>
+            Exemplos ajudam o leitor a acompanhar os conceitos
+            apresentados e entender sua aplicação.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">02 — EXERCÍCIOS</div>
+          <h3>Exercícios propostos</h3>
+          <p>
+            Atividades para colocar em prática os conceitos
+            estudados ao longo dos capítulos.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">03 — DESAFIOS</div>
+          <h3>Desafios</h3>
+          <p>
+            Problemas que estimulam o leitor a aplicar o conhecimento
+            e desenvolver seu raciocínio de programação.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">04 — BOAS PRÁTICAS</div>
+          <h3>Boas práticas</h3>
+          <p>
+            Orientações para desenvolver programas de maneira
+            mais organizada e consciente.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">05 — PROJETOS</div>
+          <h3>Organização de projetos</h3>
+          <p>
+            Conceitos para compreender como organizar projetos
+            desenvolvidos em Python.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">06 — APLICAÇÃO</div>
+          <h3>Do conceito ao programa</h3>
+          <p>
+            O aprendizado evolui dos fundamentos para a criação
+            de programas completos.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AUTOR -->
+  <section class="author">
+    <div class="container author-box">
+
+      <h2>Sobre o autor</h2>
+
+      <p>
+        <strong>Marcos Rosa</strong> é professor e autor de conteúdos
+        técnicos e educacionais nas áreas de tecnologia, programação,
+        pesquisa e educação.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="comprar">
+    <div class="container">
+
+      <h2>Comece hoje sua jornada na programação.</h2>
+
+      <p>
+        Descubra por que Python é uma linguagem ideal para aprender,
+        criar e inovar. Conheça <strong>Seja Fera em Python —
+        Fundamentos da Linguagem Python</strong>.
+      </p>
+
+      <a
+        class="btn btn-primary amazon-link"
+        data-position="final"
+        href="https://www.amazon.com.br/Seja-fera-Python-Fundamentos-Linguagem-ebook/dp/B0HB7S9XJR/"
+        target="_blank"
+        rel="noopener noreferrer sponsored">
+        Comprar na Amazon →
+      </a>
+
+      <div class="cta-note">
+        Você será direcionado para a Amazon Brasil.
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    Seja Fera em Python — Fundamentos da Linguagem Python
+  </div>
+</footer>
+
+<script>
+  /*
+   * Google Analytics
+   *
+   * Depois de instalar o Google Analytics, os cliques nos
+   * botões da Amazon serão enviados como evento:
+   *
+   * amazon_click
+   */
+
+  document.querySelectorAll(".amazon-link").forEach(function (link) {
+    link.addEventListener("click", function () {
+
+      if (typeof gtag === "function") {
+        gtag("event", "amazon_click", {
+          book: "seja_fera_em_python",
+          position: this.dataset.position,
+          destination: "amazon"
+        });
+      }
+
+    });
+  });
+</script>
+
+</body>
+</html>
