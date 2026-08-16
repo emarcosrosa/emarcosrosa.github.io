@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IA para Pesquisadores | Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial</title>
+  <meta name="description" content="IA para Pesquisadores: guia para ler, escrever e publicar ciência com Inteligência Artificial. Aprenda a integrar IA à pesquisa científica com rigor, ética e metodologia.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Marcos Rosa">
+
+  <link rel="canonical" href="https://emarcosrosa.github.io/ia-para-pesquisadores.html">
+
+  <meta property="og:type" content="book">
+  <meta property="og:title" content="IA para Pesquisadores | Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial">
+  <meta property="og:description" content="Um fluxo completo de pesquisa científica utilizando a Inteligência Artificial como assistente.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JT2KFQZ5NT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JT2KFQZ5NT');
+  </script>
+
+  <style>
+    :root {
+      --primary: #126E82;
+      --primary-dark: #0B1F33;
+      --primary-light: #EAF4F6;
+      --accent: #D6A84F;
+      --dark: #18232D;
+      --text: #18232D;
+      --muted: #65737F;
+      --bg: #F6F8FA;
+      --white: #fff;
+      --border: #e3e6ed;
+      --gold: #D6A84F;
+      --green: #177245;
+      --shadow: 0 18px 45px rgba(31, 22, 72, .12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .book-title-header {
+      font-size: .9rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .header-button {
+      background: var(--primary);
+      color: white;
+      padding: 10px 17px;
+      border-radius: 9px;
+      font-size: .84rem;
+      font-weight: 800;
+    }
+
+    .hero {
+      color: white;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(18,110,130,.28), transparent 31%),
+        radial-gradient(circle at 20% 90%, rgba(18,110,130,.18), transparent 35%),
+        linear-gradient(135deg, #081B2B, #0B3B4A);
+      padding: 78px 0 88px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      align-items: center;
+      gap: 75px;
+    }
+
+    .cover-area {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(18,110,130,.28);
+      filter: blur(70px);
+    }
+
+    .cover {
+      position: relative;
+      width: min(330px,82%);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 25px 30px 65px rgba(0,0,0,.42);
+      transform: rotate(1.5deg);
+    }
+
+    .cover-placeholder {
+      position: relative;
+      width: min(330px,82%);
+      aspect-ratio: 2 / 3;
+      padding: 30px;
+      border-radius: 5px;
+      background: linear-gradient(145deg, #126E82, #21173e);
+      box-shadow: 25px 30px 65px rgba(0,0,0,.42);
+      transform: rotate(1.5deg);
+      display: none;
+    }
+
+    .cover-placeholder strong {
+      display: block;
+      font-size: 2rem;
+      line-height: 1.02;
+    }
+
+    .cover-placeholder small {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 30px;
+      color: #e7e0ff;
+      line-height: 1.45;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px;
+      background: rgba(255,255,255,.08);
+      color: #E6F0F2;
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.55rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin-bottom: 17px;
+    }
+
+    h1 span { color: #D6A84F; }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: #DCE8EC;
+      margin-bottom: 21px;
+    }
+
+    .hero-text {
+      max-width: 650px;
+      color: #C5D3D9;
+      font-size: 1.02rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      min-height: 49px;
+      padding: 0 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: #D6A84F;
+      color: #1d1637;
+      box-shadow: 0 10px 25px rgba(196,181,253,.18);
+    }
+
+    .btn-secondary {
+      color: white;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    .quick-info {
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+    }
+
+    .quick-item {
+      padding: 25px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .quick-item:last-child { border-right: 0; }
+
+    .quick-item strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .quick-item span {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    section { padding: 88px 0; }
+
+    .section-heading {
+      max-width: 790px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem,4vw,2.8rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p { color: var(--muted); }
+
+    .overview { background: white; }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .overview-text h2 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .overview-text p {
+      color: var(--muted);
+      margin-bottom: 17px;
+    }
+
+    .highlight {
+      margin-top: 25px;
+      padding: 22px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      background: var(--primary-light);
+      color: #27404A;
+      font-weight: 600;
+    }
+
+    .ai-card {
+      background: #0E202B;
+      color: #D7E3E7;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .ai-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 25px;
+      color: #D6A84F;
+      font-weight: 800;
+    }
+
+    .ai-orb {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#D6A84F,#126E82);
+      box-shadow: 0 0 30px rgba(18,110,130,.28);
+    }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .flow-item {
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 9px;
+      background: rgba(255,255,255,.04);
+      font-size: .88rem;
+    }
+
+    .flow-item::before {
+      content: "→";
+      color: #D6A84F;
+      margin-right: 8px;
+      font-weight: 900;
+    }
+
+    .learning {
+      background: var(--bg);
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+
+    .learning-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-weight: 650;
+      font-size: .9rem;
+      box-shadow: 0 5px 18px rgba(20,20,50,.035);
+    }
+
+    .learning-item::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: 900;
+      margin-right: 9px;
+    }
+
+    .chapters {
+      background: white;
+    }
+
+    .chapter-list {
+      max-width: 850px;
+      margin: auto;
+      display: grid;
+      gap: 10px;
+    }
+
+    .chapter {
+      display: grid;
+      grid-template-columns: 65px 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 17px 19px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .chapter-number {
+      color: var(--primary);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .05em;
+    }
+
+    .chapter-title {
+      font-weight: 700;
+    }
+
+    .audience {
+      background: var(--bg);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 17px;
+    }
+
+    .audience-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px 18px;
+      text-align: center;
+    }
+
+    .audience-icon {
+      width: 45px;
+      height: 45px;
+      margin: 0 auto 13px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .audience-card h3 {
+      font-size: .92rem;
+      line-height: 1.35;
+    }
+
+    .principles {
+      background: white;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 22px;
+    }
+
+    .principle {
+      padding: 29px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    .principle-number {
+      color: var(--primary);
+      font-size: .77rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      margin-bottom: 11px;
+    }
+
+    .principle h3 { margin-bottom: 8px; }
+
+    .principle p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .author {
+      background: #eeeafa;
+    }
+
+    .author-box {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .author-box h2 { margin-bottom: 12px; }
+
+    .author-box p { color: var(--muted); }
+
+    .cta {
+      color: white;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(214,168,79,.22), transparent 36%),
+        linear-gradient(135deg,#081B2B,#0B3B4A);
+    }
+
+    .cta h2 {
+      font-size: clamp(2.1rem,4vw,3rem);
+      line-height: 1.12;
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      color: #C8D6DB;
+    }
+
+    .cta-note {
+      margin-top: 14px;
+      color: #A9B6BC;
+      font-size: .76rem;
+    }
+
+    footer {
+      background: #071720;
+      color: #AAB8BF;
+      padding: 27px 0;
+      text-align: center;
+      font-size: .8rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .audience-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header-button { display: none; }
+
+      .hero {
+        padding: 58px 0 68px;
+      }
+
+      .quick-grid,
+      .learning-grid,
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .quick-item:last-child {
+        border-bottom: 0;
+      }
+
+      .chapter {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="book-title-header">
+      IA para Pesquisadores
+    </div>
+
+    <a
+      class="header-button amazon-link"
+      data-position="header"
+      href="https://www.amazon.com.br/para-Pesquisadores-Intelig%C3%AAncia-Ferramentas-Pesquisador-ebook/dp/B0H4RBWZ6D/"
+      target="_blank"
+      rel="noopener noreferrer sponsored">
+      Comprar na Amazon →
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+
+      <div class="cover-area">
+        <div class="cover-glow"></div>
+
+        <!-- Coloque a capa como capa.jpg na mesma pasta deste HTML -->
+        <img
+          class="cover"
+          src="capa-ia-pesquisadores.jpg"
+          alt="Capa do livro IA para Pesquisadores — Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial"
+          onerror="
+            this.style.display='none';
+            document.querySelector('.cover-placeholder').style.display='block';
+          "
+        >
+
+        <div class="cover-placeholder">
+          <strong>IA PARA<br>PESQUISADORES</strong>
+          <small>
+            Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial<br><br>
+            Marcos Rosa
+          </small>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+
+        <span class="eyebrow">Pesquisa científica • Inteligência Artificial</span>
+
+        <h1>
+          IA para <span>Pesquisadores</span>
+        </h1>
+
+        <div class="hero-subtitle">
+          Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial
+        </div>
+
+        <p class="hero-text">
+          Como utilizar a Inteligência Artificial para construir uma introdução
+          científica, desenvolver uma revisão de literatura, definir a metodologia
+          de pesquisa, interpretar resultados e elaborar conclusões com maior
+          eficiência e rigor acadêmico?
+        </p>
+
+        <div class="buttons">
+          <a
+            class="btn btn-primary amazon-link"
+            data-position="hero"
+            href="https://www.amazon.com.br/para-Pesquisadores-Intelig%C3%AAncia-Ferramentas-Pesquisador-ebook/dp/B0H4RBWZ6D/"
+            target="_blank"
+            rel="noopener noreferrer sponsored">
+            Comprar na Amazon →
+          </a>
+
+          <a class="btn btn-secondary" href="#visao-geral">
+            Conhecer o livro
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK INFO -->
+  <section class="quick-info">
+    <div class="container quick-grid">
+
+      <div class="quick-item">
+        <strong>Pesquisa científica</strong>
+        <span>IA integrada ao fluxo de pesquisa</span>
+      </div>
+
+      <div class="quick-item">
+        <strong>Rigor acadêmico</strong>
+        <span>Uso crítico, ético e metodologicamente consistente</span>
+      </div>
+
+      <div class="quick-item">
+        <strong>Do problema à publicação</strong>
+        <span>Um fluxo completo de pesquisa científica</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VISÃO GERAL -->
+  <section class="overview" id="visao-geral">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Visão geral do livro</h2>
+        <p>
+          Mais do que uma introdução à Inteligência Artificial,
+          este livro apresenta como integrá-la ao trabalho acadêmico.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+
+        <div class="overview-text">
+
+          <h2>IA como assistente, pesquisador no controle.</h2>
+
+          <p>
+            Este livro apresenta um <strong>fluxo completo de pesquisa científica</strong>,
+            utilizando a Inteligência Artificial como assistente. A proposta abrange
+            todas as etapas da produção do conhecimento, desde a definição do problema
+            de pesquisa até a redação final de artigos, dissertações, teses e relatórios
+            científicos.
+          </p>
+
+          <p>
+            A obra demonstra como integrar a IA ao trabalho acadêmico de forma
+            <strong>crítica, ética e metodologicamente consistente</strong>, preservando
+            o protagonismo do pesquisador e a qualidade da produção científica.
+          </p>
+
+          <div class="highlight">
+            A Inteligência Artificial não substitui o pesquisador. Ela amplia sua
+            capacidade de analisar informações, gerar insights e produzir conhecimento.
+          </div>
+
+        </div>
+
+        <div class="ai-card">
+
+          <div class="ai-header">
+            <div class="ai-orb"></div>
+            Fluxo de pesquisa com IA
+          </div>
+
+          <div class="flow">
+            <div class="flow-item">Problema e perguntas de pesquisa</div>
+            <div class="flow-item">Introdução científica</div>
+            <div class="flow-item">Revisão de literatura</div>
+            <div class="flow-item">Metodologia</div>
+            <div class="flow-item">Resultados e discussão</div>
+            <div class="flow-item">Conclusões e publicação</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE APRENDE -->
+  <section class="learning">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Ao longo do livro, você aprenderá a</h2>
+        <p>
+          Utilizar a IA como apoio ao trabalho acadêmico sem abrir mão
+          do pensamento crítico e da responsabilidade científica.
+        </p>
+      </div>
+
+      <div class="learning-grid">
+
+        <div class="learning-item">Utilizar a IA como assistente cognitivo para apoiar atividades de pesquisa</div>
+        <div class="learning-item">Compreender os fundamentos da IA generativa e suas limitações</div>
+        <div class="learning-item">Identificar alucinações, vieses e problemas de confiabilidade</div>
+        <div class="learning-item">Aplicar princípios de ética, integridade científica e privacidade de dados</div>
+        <div class="learning-item">Desenvolver prompts mais eficazes para atividades acadêmicas</div>
+        <div class="learning-item">Construir introduções científicas alinhadas às boas práticas</div>
+        <div class="learning-item">Realizar revisões de literatura apoiadas por IA</div>
+        <div class="learning-item">Elaborar metodologias de pesquisa com apoio de IA</div>
+        <div class="learning-item">Estruturar resultados, discussões e conclusões</div>
+        <div class="learning-item">Compreender normativas nacionais e internacionais sobre IA</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO -->
+  <section class="chapters">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Conteúdo do livro</h2>
+        <p>
+          Dez capítulos que acompanham o pesquisador ao longo do processo
+          de produção científica com Inteligência Artificial.
+        </p>
+      </div>
+
+      <div class="chapter-list">
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 01</div>
+          <div class="chapter-title">Introdução: O papel do pesquisador na era da IA</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 02</div>
+          <div class="chapter-title">Fundamentos da IA Generativa</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 03</div>
+          <div class="chapter-title">Ética, Integridade e Normativas Acadêmicas</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 04</div>
+          <div class="chapter-title">Engenharia de Prompts</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 05</div>
+          <div class="chapter-title">Execução de Modelos de IA Localmente e de Forma Privada</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 06</div>
+          <div class="chapter-title">Construção da Introdução com IA</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 07</div>
+          <div class="chapter-title">Revisão de Literatura com IA</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 08</div>
+          <div class="chapter-title">Construção da Metodologia de Pesquisa com IA</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 09</div>
+          <div class="chapter-title">Resultados e Conclusão com IA</div>
+        </div>
+
+        <div class="chapter">
+          <div class="chapter-number">CAP. 10</div>
+          <div class="chapter-title">Síntese e Perspectivas Futuras</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="audience">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Para quem é este livro?</h2>
+        <p>
+          Uma abordagem prática para quem participa da produção
+          e comunicação do conhecimento científico.
+        </p>
+      </div>
+
+      <div class="audience-grid">
+
+        <article class="audience-card">
+          <div class="audience-icon">G</div>
+          <h3>Estudantes de graduação</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">PG</div>
+          <h3>Estudantes de pós-graduação</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">R</div>
+          <h3>Pesquisadores</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">D</div>
+          <h3>Docentes</h3>
+        </article>
+
+      </div>
+
+      <div style="max-width: 500px; margin: 17px auto 0;">
+        <article class="audience-card">
+          <div class="audience-icon">P</div>
+          <h3>Profissionais envolvidos na produção científica</h3>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRINCÍPIOS -->
+  <section class="principles">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>O diferencial está no uso crítico da IA</h2>
+        <p>
+          A proposta não é substituir o pesquisador, mas ampliar sua capacidade
+          de analisar informações, gerar insights e produzir conhecimento.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+
+        <article class="principle">
+          <div class="principle-number">01 — CRITÉRIO</div>
+          <h3>Pensamento crítico</h3>
+          <p>
+            A IA é apresentada como ferramenta de apoio, enquanto o pesquisador
+            permanece responsável por avaliar informações e evidências.
+          </p>
+        </article>
+
+        <article class="principle">
+          <div class="principle-number">02 — ÉTICA</div>
+          <h3>Integridade científica</h3>
+          <p>
+            O uso da IA é discutido considerando ética, integridade acadêmica,
+            autoria intelectual e privacidade de dados.
+          </p>
+        </article>
+
+        <article class="principle">
+          <div class="principle-number">03 — MÉTODO</div>
+          <h3>Rigor metodológico</h3>
+          <p>
+            A tecnologia é integrada ao processo de pesquisa sem abandonar
+            os princípios que sustentam a produção científica.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOR -->
+  <section class="author">
+    <div class="container author-box">
+      <h2>Sobre o autor</h2>
+
+      <p>
+        <strong>Marcos Rosa</strong> é professor e autor de conteúdos
+        técnicos e educacionais nas áreas de tecnologia, pesquisa e educação.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="comprar">
+    <div class="container">
+
+      <h2>Leve a Inteligência Artificial para o seu processo de pesquisa.</h2>
+
+      <p>
+        Aprenda a utilizar a IA como assistente no processo científico,
+        preservando o rigor metodológico, a autoria intelectual e os
+        princípios que sustentam a ciência.
+      </p>
+
+      <a
+        class="btn btn-primary amazon-link"
+        data-position="final"
+        href="https://www.amazon.com.br/para-Pesquisadores-Intelig%C3%AAncia-Ferramentas-Pesquisador-ebook/dp/B0H4RBWZ6D/"
+        target="_blank"
+        rel="noopener noreferrer sponsored">
+        Comprar na Amazon →
+      </a>
+
+      <div class="cta-note">
+        Você será direcionado para a Amazon Brasil.
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    IA para Pesquisadores — Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial
+  </div>
+</footer>
+
+<script>
+  /*
+   * Registra no Google Analytics os cliques que levam à Amazon.
+   */
+  document.querySelectorAll(".amazon-link").forEach(function(link) {
+    link.addEventListener("click", function() {
+      if (typeof gtag === "function") {
+        gtag("event", "amazon_click", {
+          book: "ia_para_pesquisadores",
+          position: this.dataset.position,
+          destination: "amazon"
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
