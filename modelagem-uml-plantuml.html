@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Modelagem de Sistemas com UML e PlantUML | Da Análise de Requisitos aos Diagramas Profissionais</title>
+  <meta name="description" content="Aprenda a criar diagramas UML utilizando PlantUML, desde os primeiros comandos até modelos completos e profissionais.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Marcos Rosa">
+
+  <link rel="canonical" href="https://emarcosrosa.github.io/modelagem-uml-plantuml.html">
+
+  <meta property="og:type" content="book">
+  <meta property="og:title" content="Modelagem de Sistemas com UML e PlantUML">
+  <meta property="og:description" content="Da Análise de Requisitos aos Diagramas Profissionais. Aprenda UML e PlantUML de forma prática e progressiva.">
+  <meta property="og:url" content="https://emarcosrosa.github.io/modelagem-uml-plantuml.html">
+  <meta property="og:image" content="https://emarcosrosa.github.io/capa-modelagem-uml-plantuml.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=klqfrUGZcMF9vJCtwpOVDO4Cln6_cKtFQRUo5jXqNPKDbmsk4u5K6W7aGcfmlhq4vXwHIpSM6PmAxjFo9MTvT8Oqn5U82Iknroj4jCIblzi4oXQY9RigrK6LqRa9VjNkR6tjBOmTsOdfHxKEDRn0skNBXM9WE0whxtKjaNYP6ZglPHaDBbZxAkiM7HolN4_bA-y9MhHISc5iy2Xj52iTSWVMJ44Ufhc4tqrSAQeCbIDG_XZ-g3sr8Kv9MMeTZw5OMGAKvumuVtGufIUqB3TcdK2M7AbtIq5_ZCynk1_w99jm8rBj4D_9AeD_FcDEn2QWB40WHxp0Zx4vywZb7m6WRw" charset="UTF-8"></script><script async src="https://www.googletagmanager.com/gtag/js?id=G-JT2KFQZ5NT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JT2KFQZ5NT');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Modelagem de Sistemas com UML e PlantUML",
+    "author": {
+      "@type": "Person",
+      "name": "Marcos Rosa"
+    },
+    "description": "Da Análise de Requisitos aos Diagramas Profissionais.",
+    "inLanguage": "pt-BR",
+    "bookFormat": "https://schema.org/EBook",
+    "image": "https://emarcosrosa.github.io/capa-modelagem-uml-plantuml.png",
+    "url": "https://emarcosrosa.github.io/modelagem-uml-plantuml.html"
+  }
+  </script>
+
+  <style>
+    :root {
+      --uml-blue: #1557b0;
+      --uml-dark: #0b2d5c;
+      --uml-light: #eaf2fb;
+      --uml-cyan: #39a9db;
+      --navy: #071a2b;
+      --text: #17212b;
+      --muted: #637181;
+      --bg: #f5f7fa;
+      --white: #ffffff;
+      --border: #e3e8ee;
+      --green: #16834a;
+      --shadow: 0 18px 45px rgba(7, 26, 43, .12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .book-title-header {
+      font-size: .92rem;
+      font-weight: 800;
+      color: var(--uml-dark);
+    }
+
+    .header-button {
+      background: var(--uml-blue);
+      color: #fff;
+      padding: 10px 17px;
+      border-radius: 9px;
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 80% 15%, rgba(21,87,176,.42), transparent 30%),
+        linear-gradient(135deg, #061728, #103c61);
+      color: white;
+      padding: 78px 0 88px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      align-items: center;
+      gap: 75px;
+    }
+
+    .cover-area {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: rgba(21,87,176,.42);
+      border-radius: 50%;
+      filter: blur(70px);
+    }
+
+    .cover {
+      position: relative;
+      width: min(330px, 82%);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 25px 30px 65px rgba(0,0,0,.42);
+      transform: rotate(1.5deg);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      color: #d9eafb;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 5.5vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin-bottom: 14px;
+    }
+
+    h1 span { color: var(--uml-cyan); }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      color: #dce8f2;
+      margin-bottom: 22px;
+    }
+
+    .hero-text {
+      max-width: 660px;
+      color: #c4d2df;
+      font-size: 1.04rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      min-height: 49px;
+      padding: 0 22px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: #ffffff;
+      color: var(--uml-dark);
+      box-shadow: 0 10px 25px rgba(0,0,0,.16);
+    }
+
+    .btn-secondary {
+      color: white;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    .quick-info {
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .quick-item {
+      padding: 25px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .quick-item:last-child { border-right: 0; }
+
+    .quick-item strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .quick-item span {
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    section { padding: 88px 0; }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p { color: var(--muted); }
+
+    .overview { background: white; }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .overview-text h2 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .overview-text p {
+      color: var(--muted);
+      margin-bottom: 17px;
+    }
+
+    .highlight {
+      margin-top: 25px;
+      padding: 22px;
+      border-left: 4px solid var(--uml-cyan);
+      border-radius: 0 12px 12px 0;
+      background: #eaf5fb;
+      color: #253b49;
+      font-weight: 600;
+    }
+
+    .uml-card {
+      background: #0a1725;
+      border-radius: var(--radius);
+      padding: 30px;
+      color: #dbe8f4;
+      box-shadow: var(--shadow);
+    }
+
+    .uml-window {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 22px;
+    }
+
+    .uml-window span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #657586;
+    }
+
+    .uml-card pre {
+      font: 500 .84rem/1.8 ui-monospace, SFMono-Regular, Consolas, monospace;
+      white-space: pre-wrap;
+    }
+
+    .pink { color: #ff79c6; }
+    .green { color: #50fa7b; }
+    .yellow { color: #f1fa8c; }
+    .blue-code { color: #8be9fd; }
+
+    .learning { background: var(--bg); }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+    }
+
+    .learning-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 17px 18px;
+      font-weight: 700;
+      font-size: .91rem;
+      box-shadow: 0 5px 18px rgba(10,30,50,.035);
+    }
+
+    .learning-item::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+      margin-right: 9px;
+    }
+
+    .audience { background: white; }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .audience-card {
+      padding: 23px 17px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .audience-icon {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 13px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--uml-light);
+      color: var(--uml-blue);
+      font-weight: 900;
+    }
+
+    .audience-card h3 {
+      font-size: .95rem;
+      line-height: 1.3;
+    }
+
+    .features { background: var(--bg); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature {
+      padding: 29px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .feature-number {
+      font-size: .78rem;
+      font-weight: 900;
+      color: var(--uml-blue);
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+    }
+
+    .feature h3 { margin-bottom: 8px; }
+
+    .feature p {
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    .author { background: #eaf2f7; }
+
+    .author-box {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .author-box h2 { margin-bottom: 13px; }
+
+    .author-box p { color: var(--muted); }
+
+    .cta {
+      color: white;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(21,87,176,.42), transparent 35%),
+        linear-gradient(135deg, #061728, #103c61);
+    }
+
+    .cta h2 {
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      line-height: 1.12;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      max-width: 680px;
+      margin: 0 auto 28px;
+      color: #c7d6e4;
+    }
+
+    .cta-note {
+      margin-top: 15px;
+      font-size: .76rem;
+      color: #aebdca;
+    }
+
+    footer {
+      background: #061321;
+      color: #aebdcc;
+      padding: 27px 0;
+      text-align: center;
+      font-size: .8rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .buttons { justify-content: center; }
+
+      .learning-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 650px) {
+      .header-button { display: none; }
+
+      .hero { padding: 58px 0 68px; }
+
+      .quick-grid,
+      .learning-grid,
+      .audience-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .quick-item:last-child { border-bottom: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="book-title-header">
+      Modelagem de Sistemas com UML e PlantUML
+    </div>
+
+    <a
+      class="header-button amazon-link"
+      data-position="header"
+      href="https://www.amazon.com.br/dp/B0GZLMKFPY"
+      target="_blank"
+      rel="noopener noreferrer sponsored">
+      Comprar na Amazon →
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+
+      <div class="cover-area">
+        <div class="cover-glow"></div>
+
+        <img
+          class="cover"
+          src="capa-modelagem-uml-plantuml.png"
+          alt="Capa do livro Modelagem de Sistemas com UML e PlantUML — Da Análise de Requisitos aos Diagramas Profissionais">
+        </div>
+
+      <div class="hero-copy">
+
+        <span class="eyebrow">UML + PlantUML</span>
+
+        <h1>
+          Modelagem de Sistemas com <span>UML e PlantUML</span>
+        </h1>
+
+        <div class="hero-subtitle">
+          Da Análise de Requisitos aos Diagramas Profissionais
+        </div>
+
+        <p class="hero-text">
+          Aprenda a criar <strong>diagramas UML utilizando PlantUML</strong>,
+          desde os primeiros comandos até modelos completos e profissionais.
+          Uma abordagem prática e progressiva para escrever diagramas como
+          código, organizá-los, personalizá-los, visualizá-los e exportá-los.
+        </p>
+
+        <div class="buttons">
+
+          <a
+            class="btn btn-primary amazon-link"
+            data-position="hero"
+            href="https://www.amazon.com.br/dp/B0GZLMKFPY"
+            target="_blank"
+            rel="noopener noreferrer sponsored">
+            Comprar na Amazon →
+          </a>
+
+          <a class="btn btn-secondary" href="#visao-geral">
+            Conhecer o livro
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUICK INFO -->
+  <section class="quick-info">
+    <div class="container quick-grid">
+
+      <div class="quick-item">
+        <strong>UML</strong>
+        <span>Modelagem de sistemas de forma estruturada</span>
+      </div>
+
+      <div class="quick-item">
+        <strong>PlantUML</strong>
+        <span>Diagramas escritos como código</span>
+      </div>
+
+      <div class="quick-item">
+        <strong>Prática</strong>
+        <span>Exemplos, exercícios e referências rápidas</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VISÃO GERAL -->
+  <section class="overview" id="visao-geral">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Visão geral do livro</h2>
+        <p>
+          Uma abordagem prática para compreender a modelagem e transformar
+          código PlantUML em diagramas profissionais.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+
+        <div class="overview-text">
+
+          <h2>Da análise de requisitos aos diagramas profissionais.</h2>
+
+          <p>
+            <strong>Modelagem de Sistemas com UML e PlantUML</strong> apresenta
+            o PlantUML de forma prática e progressiva, desde os primeiros
+            comandos até a construção de modelos completos.
+          </p>
+
+          <p>
+            O leitor aprende a escrever diagramas como código, organizá-los,
+            personalizá-los, visualizá-los e exportá-los, aproximando a
+            modelagem das práticas de desenvolvimento de software.
+          </p>
+
+          <p>
+            O livro aborda quatro tipos fundamentais de diagramas:
+            <strong>casos de uso, classes, atividades e sequência</strong>,
+            sempre com exemplos práticos em PlantUML.
+          </p>
+
+          <div class="highlight">
+            A proposta é simples: <strong>compreender a modelagem,
+            escrever o modelo e transformar o código em diagramas profissionais.</strong>
+          </div>
+
+        </div>
+
+        <div class="uml-card">
+
+          <div class="uml-window">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+<pre><span class="pink">@startuml</span>
+
+<span class="blue-code">actor</span> Usuario
+
+<span class="blue-code">rectangle</span> Sistema {
+  Usuario <span class="blue-code">--&gt;</span> (Login)
+  Usuario <span class="blue-code">--&gt;</span> (Consultar dados)
+}
+
+<span class="pink">@enduml</span></pre>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- APRENDIZADO -->
+  <section class="learning">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Neste livro você aprenderá</h2>
+        <p>
+          Os principais conceitos de UML e os recursos necessários para
+          construir diagramas utilizando PlantUML.
+        </p>
+      </div>
+
+      <div class="learning-grid">
+
+        <div class="learning-item">Diagramas de Casos de Uso</div>
+        <div class="learning-item">Atores e relacionamentos</div>
+        <div class="learning-item">Include, extend e generalização</div>
+        <div class="learning-item">Diagramas de Classes</div>
+        <div class="learning-item">Atributos, métodos e associações</div>
+        <div class="learning-item">Multiplicidades, herança e interfaces</div>
+        <div class="learning-item">Agregação e composição</div>
+        <div class="learning-item">Diagramas de Atividades</div>
+        <div class="learning-item">Decisões, repetições e paralelismo</div>
+        <div class="learning-item">Partitions, groups e swimlanes</div>
+        <div class="learning-item">Diagramas de Sequência</div>
+        <div class="learning-item">Mensagens, ativações e retornos</div>
+        <div class="learning-item">alt, opt, loop e par</div>
+        <div class="learning-item">Personalização dos diagramas</div>
+        <div class="learning-item">Organização visual e boas práticas</div>
+        <div class="learning-item">Erros comuns e referências rápidas</div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="audience">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Para quem é este livro?</h2>
+        <p>
+          O conteúdo foi desenvolvido para quem deseja aprender UML de
+          maneira prática ou utilizar PlantUML em projetos reais.
+        </p>
+      </div>
+
+      <div class="audience-grid">
+
+        <article class="audience-card">
+          <div class="audience-icon">C</div>
+          <h3>Estudantes de Computação</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">D</div>
+          <h3>Profissionais de desenvolvimento</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">A</div>
+          <h3>Analistas de sistemas</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">P</div>
+          <h3>Professores</h3>
+        </article>
+
+        <article class="audience-card">
+          <div class="audience-icon">U</div>
+          <h3>Quem deseja aprender UML na prática</h3>
+        </article>
+
+      </div>
+
+      <div style="max-width: 700px; margin: 22px auto 0; text-align:center;">
+        <div class="audience-card">
+          <div class="audience-icon">+</div>
+          <h3>
+            Também é adequado para quem já conhece UML e deseja utilizar
+            PlantUML para criar, manter, versionar e reutilizar seus diagramas.
+          </h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="features">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Um aprendizado pensado para a prática</h2>
+        <p>
+          O conteúdo combina fundamentos de modelagem, código PlantUML,
+          exercícios e recursos de consulta.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <article class="feature">
+          <div class="feature-number">01 — EXEMPLOS</div>
+          <h3>Exemplos práticos</h3>
+          <p>
+            Exemplos em PlantUML para acompanhar a construção dos
+            diferentes tipos de diagramas.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">02 — EXERCÍCIOS</div>
+          <h3>Exercícios</h3>
+          <p>
+            Atividades ao final dos capítulos para colocar os conceitos
+            de modelagem em prática.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">03 — PERSONALIZAÇÃO</div>
+          <h3>Personalização</h3>
+          <p>
+            Recursos para organizar e personalizar visualmente os
+            diagramas produzidos com PlantUML.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">04 — BOAS PRÁTICAS</div>
+          <h3>Boas práticas</h3>
+          <p>
+            Orientações para estruturar modelos e evitar problemas
+            comuns durante a criação dos diagramas.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">05 — CHEAT SHEETS</div>
+          <h3>Referências rápidas</h3>
+          <p>
+            Cheat sheets para consultar comandos e recursos durante
+            o desenvolvimento dos modelos.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-number">06 — RESOLUÇÕES</div>
+          <h3>Resolução dos exercícios</h3>
+          <p>
+            Resolução dos exercícios finais para apoiar a consolidação
+            do conhecimento.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AUTOR -->
+  <section class="author">
+    <div class="container author-box">
+
+      <h2>Sobre o autor</h2>
+
+      <p>
+        <strong>Marcos Rosa</strong> é professor e autor de conteúdos
+        técnicos e educacionais nas áreas de tecnologia, programação,
+        pesquisa e educação.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="comprar">
+    <div class="container">
+
+      <h2>Transforme o código em diagramas profissionais.</h2>
+
+      <p>
+        Se você deseja sair da teoria e aprender a utilizar UML na prática,
+        <strong>Modelagem de Sistemas com UML e PlantUML</strong> oferece
+        um caminho estruturado desde os primeiros conceitos até a construção
+        de modelos completos.
+      </p>
+
+      <a
+        class="btn btn-primary amazon-link"
+        data-position="final"
+        href="https://www.amazon.com.br/dp/B0GZLMKFPY"
+        target="_blank"
+        rel="noopener noreferrer sponsored">
+        Conhecer o livro na Amazon →
+      </a>
+
+      <div class="cta-note">
+        Você será direcionado para a Amazon Brasil.
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    Modelagem de Sistemas com UML e PlantUML — Da Análise de Requisitos aos Diagramas Profissionais
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll(".amazon-link").forEach(function (link) {
+    link.addEventListener("click", function () {
+      if (typeof gtag === "function") {
+        gtag("event", "amazon_click", {
+          book: "modelagem_uml_plantuml",
+          position: this.dataset.position,
+          destination: "amazon"
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
