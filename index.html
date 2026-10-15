@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Marcos Rosa | Livros sobre Tecnologia, Programação e Pesquisa</title>
-  <meta name="description" content="Conheça os livros de Marcos Rosa sobre programação, Python, Inteligência Artificial e pesquisa científica.">
+  <meta name="description" content="Conheça os livros de Marcos Rosa sobre programação, Python, Inteligência Artificial, pesquisa científica e modelagem de sistemas com UML.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Marcos Rosa">
-
+  <meta name="theme-color" content="#f4f4f0">
   <link rel="canonical" href="https://emarcosrosa.github.io/">
 
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://emarcosrosa.github.io/">
   <meta property="og:title" content="Marcos Rosa | Livros">
-  <meta property="og:description" content="Livros sobre programação, Python, Inteligência Artificial e pesquisa científica.">
+  <meta property="og:description" content="Livros sobre programação, Python, Inteligência Artificial, pesquisa científica e UML.">
+  <meta property="og:image" content="https://emarcosrosa.github.io/capa-python.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JT2KFQZ5NT"></script>
@@ -23,416 +25,365 @@
     gtag('js', new Date());
     gtag('config', 'G-JT2KFQZ5NT');
   </script>
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preload" href="fonts/RedHatDisplay-Black.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/RedHatText-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Marcos Rosa",
+    "url": "https://emarcosrosa.github.io/",
+    "jobTitle": "Professor e autor",
+    "workExample": [
+      {"@type": "Book", "name": "Seja Fera em Python — Fundamentos da Linguagem Python", "url": "https://emarcosrosa.github.io/seja-fera-python.html"},
+      {"@type": "Book", "name": "IA para Pesquisadores — Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial", "url": "https://emarcosrosa.github.io/ia-para-pesquisadores.html"},
+      {"@type": "Book", "name": "Modelagem de Sistemas com UML e PlantUML — Da Análise de Requisitos aos Diagramas Profissionais", "url": "https://emarcosrosa.github.io/modelagem-uml-plantuml.html"}
+    ]
+  }
+  </script>
 
   <style>
-    :root {
-      --navy: #0b1f33;
-      --blue: #126e82;
-      --blue-light: #eaf4f6;
-      --gold: #d6a84f;
-      --text: #18232d;
-      --muted: #66737e;
-      --bg: #f6f8fa;
-      --white: #ffffff;
-      --border: #e2e7eb;
+    /* ---------- Por onde começar ---------- */
+    .start { padding-block: var(--section-y); }
+    .start__grid { row-gap: 48px; align-items: start; }
+    .start__ask { grid-column: 1 / span 6; }
+    .start__ask .head { margin-bottom: 40px; }
+    .start__intro { margin-bottom: 32px; max-width: 40ch; }
+    .pick {
+      display: flex; align-items: center; gap: 18px; width: 100%;
+      min-height: 84px; padding: 18px 20px; margin-bottom: 8px;
+      background: var(--paper-2); color: var(--ink); border: 0; cursor: pointer; text-align: left; text-decoration: none;
+      font-family: var(--font-display); font-weight: 900; font-size: clamp(1.25rem, 0.9rem + 1.2vw, 1.875rem); line-height: 1.1; letter-spacing: -0.01em;
+      transition: background-color 200ms ease, transform 160ms var(--ease-out);
+    }
+    .pick:hover { background: #dfdfd6; }
+    .pick:active { transform: scale(0.985); }
+    .pick__dot { flex: 0 0 18px; height: 18px; background: #c4c4ba; transition: background-color 200ms ease, transform 200ms var(--ease-out); }
+    .pick[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .pick[aria-pressed="true"] .pick__dot { background: var(--onca); transform: rotate(45deg); }
+    .pick[data-pick="ia"][aria-pressed="true"] .pick__dot { background: #6f9bff; }
+    .pick[data-pick="uml"][aria-pressed="true"] .pick__dot { background: var(--tucano); }
+
+    .start__answers { grid-column: 8 / span 5; }
+    .answer { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); gap: 28px; align-items: end; margin-bottom: 48px; }
+    .answer .cover { width: 100%; }
+    .answer h3 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.05; margin-bottom: 14px; }
+    .answer p { margin-bottom: 20px; }
+    .answer .btn { width: 100%; }
+    .answer .textlink { min-height: 48px; }
+    .is-live .answer { margin-bottom: 0; }
+    @media (prefers-reduced-motion: no-preference) {
+      .answer.swap .cover { animation: cover-in 520ms var(--ease-out); }
+      .answer.swap > div { animation: text-in 520ms var(--ease-out) 60ms both; }
+    }
+    @keyframes cover-in { from { opacity: 0; transform: translateY(14px) rotate(-1.5deg); } }
+    @keyframes text-in { from { opacity: 0; transform: translateY(10px); } }
+    @media (max-width: 900px) {
+      .start__ask, .start__answers { grid-column: 1 / -1; }
+    }
+    @media (max-width: 520px) {
+      .answer { grid-template-columns: 0.8fr 1fr; gap: 18px; }
+      .answer h3 { font-size: 1.375rem; }
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* ---------- Capítulos ---------- */
+    .ch__grid { position: relative; z-index: 1; row-gap: 32px; }
+    .ch__text { grid-column: 1 / span 6; }
+    .ch__text .head { margin-bottom: 32px; }
+    .ch__text .lead { margin-bottom: 24px; }
+    .ch__text .measure { margin-bottom: 36px; }
+    .ch__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; }
+    .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .facts li { padding: 10px 16px; font-weight: 500; }
+
+    #python .facts li { background: rgba(13,16,20,0.09); }
+    #python .measure { color: #2b2207; }
+    #python .onca-img { right: max(-40px, -2vw); bottom: 0; width: min(52vw, 860px); }
+
+    #ia .ch__text { grid-column: 7 / span 6; }
+    #ia .head { font-size: min(var(--step-head), 5.4vw); }
+    @media (max-width: 900px) { #ia .head { font-size: 10.2vw; } }
+    #ia .lead, #ia .measure { color: var(--paper); }
+    #ia .measure { color: var(--on-cobalt-soft); }
+    #ia .harpia-img { left: 0; bottom: 0; height: min(96%, 900px); width: auto; transform: scaleX(-1); }
+    #ia .js-rise-wrap { position: absolute; inset: 0; }
+    .route { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 40px; counter-reset: r; }
+    .route li { background: var(--cobalt-deep); padding: 14px 16px; font-weight: 500; }
+
+    #uml .ch__text { grid-column: 1 / span 7; }
+    #uml .measure { color: var(--on-ink-soft); }
+    #uml .tucano-img { right: var(--margin); top: clamp(60px, 8vw, 120px); width: min(42vw, 640px); }
+    .code {
+      grid-column: 1 / span 6; margin: 0; padding: 28px 32px; background: var(--ink-2); color: #e8eaed;
+      font: 500 clamp(0.95rem, 0.9rem + 0.2vw, 1.0625rem)/1.6 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      overflow-x: auto; white-space: pre;
+    }
+    .code .k { color: var(--tucano); }
+    .code .s { color: var(--onca); }
+    .code .c { color: #8fb0ff; }
+    .uml-note { grid-column: 8 / span 5; align-self: end; }
+    .uml-note p { margin-bottom: 28px; }
+
+    @media (max-width: 900px) {
+      .ch__text, #ia .ch__text, #uml .ch__text, .code, .uml-note { grid-column: 1 / -1; }
+      .chapter { padding-bottom: 0; }
+      .animal { position: relative; }
+      #python .onca-img { width: 108%; margin: 24px -4% 0 auto; right: auto; }
+      #ia { display: flex; flex-direction: column; }
+      #ia .harpia-img { order: 2; height: auto; width: 82%; margin-top: 32px; }
+      #uml .tucano-img { width: 78%; margin: 0 0 24px auto; top: 0; right: 0; }
+      #uml .ch__grid { padding-bottom: var(--section-y); }
+      .route { grid-template-columns: 1fr; }
     }
 
-    body {
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
+    /* ---------- Feche ---------- */
+    .close { padding-block: var(--section-y) clamp(64px, 8vw, 120px); }
+    .close .display { margin-bottom: clamp(48px, 7vw, 96px); }
+    .close__list li a {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px;
+      padding: 22px 0; text-decoration: none; border: 0;
+      font-family: var(--font-display); font-weight: 900; font-size: clamp(1.375rem, 0.9rem + 2vw, 3rem); line-height: 1.05; letter-spacing: -0.015em;
     }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1050px, 92%);
-      margin: 0 auto;
-    }
-
-    header {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .brand {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--navy);
-    }
-
-    .brand span {
-      color: var(--blue);
-    }
-
-    .header-subtitle {
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    .hero {
-      padding: 85px 0 70px;
-      text-align: center;
-      background:
-        linear-gradient(
-          135deg,
-          #f6f8fa 0%,
-          #eaf4f6 100%
-        );
-    }
-
-    .hero h1 {
-      color: var(--navy);
-      font-size: clamp(2.3rem, 5vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 17px;
-      letter-spacing: -.035em;
-    }
-
-    .hero h1 span {
-      color: var(--blue);
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .books {
-      padding: 75px 0 90px;
-    }
-
-    .books-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .book-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 12px 35px rgba(11,31,51,.07);
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    .book-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 18px 45px rgba(11,31,51,.12);
-    }
-
-    .book-image {
-      height: 350px;
-      padding: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #eef3f6;
-    }
-
-    .book-image img {
-      height: 100%;
-      max-width: 80%;
-      object-fit: contain;
-      box-shadow: 10px 14px 25px rgba(0,0,0,.18);
-    }
-
-    .book-info {
-      padding: 28px;
-    }
-
-    .book-category {
-      display: inline-block;
-      margin-bottom: 10px;
-      color: var(--blue);
-      font-size: .74rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .book-info h2 {
-      color: var(--navy);
-      font-size: 1.4rem;
-      line-height: 1.25;
-      margin-bottom: 10px;
-    }
-
-    .book-info p {
-      color: var(--muted);
-      font-size: .9rem;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 45px;
-      padding: 0 18px;
-      border-radius: 9px;
-      background: var(--navy);
-      color: white;
-      font-size: .88rem;
-      font-weight: 800;
-      transition: .2s;
-    }
-
-    .button:hover {
-      background: var(--blue);
-      transform: translateY(-1px);
-    }
-
-    .about {
-      padding: 65px 0;
-      background: var(--white);
-      border-top: 1px solid var(--border);
-    }
-
-    .about-content {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .about h2 {
-      color: var(--navy);
-      margin-bottom: 12px;
-    }
-
-    .about p {
-      color: var(--muted);
-    }
-
-    footer {
-      padding: 30px 0;
-      text-align: center;
-      background: var(--navy);
-      color: #b9c8d2;
-      font-size: .8rem;
-    }
-
-    @media (max-width: 750px) {
-      .header-subtitle {
-        display: none;
-      }
-
-      .books-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .book-image {
-        height: 390px;
-      }
-    }
+    .close__list li + li { margin-top: 8px; }
+    .close__list li a { padding: 22px 20px; background: var(--ink-2); transition: background-color 200ms ease; }
+    .close__list li a:hover { background: #232933; }
+    .close__list .go { font-family: var(--font-text); font-weight: 500; font-size: var(--step-body); background: var(--tucano); color: var(--ink); padding: 12px 18px; transition: transform 160ms var(--ease-out); white-space: nowrap; }
+    .close__list a:hover .go { transform: translateX(-6px); }
+    .close__list a:active .go { transform: scale(0.97); }
+    .close__list .t { transition: transform 260ms var(--ease-out); }
+    .close__list a:hover .t { transform: translateX(10px); }
+    .close__note { margin-top: 32px; color: var(--on-ink-soft); }
+    @media (max-width: 640px) { .close__list li a { grid-template-columns: 1fr; } .close__list .go { justify-self: start; } }
   </style>
 </head>
-
 <body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<header>
-  <div class="container header">
-    <div class="header-subtitle">
-      Livros, tecnologia, pesquisa e educação
-    </div>
-  </div>
-</header>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="Marcos Rosa — Livros, página inicial">Marcos Rosa</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#python">Python</a>
+      <a href="#ia">IA na pesquisa</a>
+      <a href="#uml">UML</a>
+      <a href="#autor">Autor</a>
+      <a class="btn btn--sm btn--ink" href="#comecar">Escolher meu livro</a>
+    </nav>
+  </header>
 
-<main>
-
-  <section class="hero">
-    <div class="container">
-      <h1>
-        Livros para <span>aprender e pesquisar</span>
-      </h1>
-
-      <p>
-        Conteúdos práticos sobre programação, tecnologia,
-        Inteligência Artificial e pesquisa científica.
-      </p>
-    </div>
-  </section>
-
-  <section class="books">
-    <div class="container">
-
-      <div class="books-grid">
-
-        <!-- LIVRO 1 -->
-        <article class="book-card">
-
-          <div class="book-image">
-            <img
-              src="capa-python.jpg"
-              alt="Capa do livro Seja Fera em Python — Fundamentos da Linguagem Python"
-            >
-          </div>
-
-          <div class="book-info">
-
-            <div class="book-category">
-              Programação
-            </div>
-
-            <h2>
-              Seja Fera em Python
-            </h2>
-
-            <p>
-              Fundamentos da Linguagem Python. Um guia para quem
-              deseja dar os primeiros passos na programação de
-              forma prática, organizada e objetiva.
-            </p>
-
-            <a
-              class="button"
-              href="seja-fera-python.html">
-              Conhecer o livro →
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- LIVRO 2 -->
-        <article class="book-card">
-
-          <div class="book-image">
-            <img
-              src="capa-ia-pesquisadores.jpg"
-              alt="Capa do livro IA para Pesquisadores — Guia para Ler, Escrever e Publicar Ciência com Inteligência Artificial"
-            >
-          </div>
-
-          <div class="book-info">
-
-            <div class="book-category">
-              Pesquisa e Inteligência Artificial
-            </div>
-
-            <h2>
-              IA para Pesquisadores
-            </h2>
-
-            <p>
-              Guia para Ler, Escrever e Publicar Ciência com
-              Inteligência Artificial, integrando IA ao trabalho
-              acadêmico com rigor, ética e método.
-            </p>
-
-            <a
-              class="button"
-              href="ia-para-pesquisadores.html">
-              Conhecer o livro →
-            </a>
-
-          </div>
-
-        </article>
-
-        <!-- LIVRO 3 -->
-        <article class="book-card">
-
-          <div class="book-image">
-            <img
-              src="capa-modelagem-uml-plantuml.jpg"
-              alt="Capa do livro Modelagem de Sistemas com UML e PlantUML — Da Análise de Requisitos aos Diagramas Profissionais"
-            >
-          </div>
-
-          <div class="book-info">
-
-            <div class="book-category">
-              Modelagem de Sistemas e UML
-            </div>
-
-            <h2>
-              Modelagem de Sistemas com UML e PlantUML
-            </h2>
-
-            <p>
-              Da Análise de Requisitos aos Diagramas Profissionais,
-              aprendendo UML de forma prática e utilizando PlantUML
-              para criar, organizar e versionar diagramas como código.
-            </p>
-
-            <a
-              class="button"
-              href="modelagem-uml-plantuml.html">
-              Conhecer o livro →
-            </a>
-
-          </div>
-
-        </article>
-
+  <main id="conteudo">
+    <!-- Hero: a linha d'água -->
+    <section class="waterline" aria-labelledby="h-hero">
+      <div class="waterline__copy waterline__copy--top">
+        <h1 id="h-hero" class="display lines">
+          <span class="line"><span data-line style="--i:0">Três livros,</span></span>
+          <span class="line"><span data-line style="--i:1">três feras</span></span>
+        </h1>
       </div>
+      <div class="waterline__copy waterline__copy--low" aria-hidden="true">
+        <p class="display lines" style="width:100%">
+          <span class="line"><span data-line style="--i:0">Três livros,</span></span>
+          <span class="line"><span data-line style="--i:1">três feras</span></span>
+        </p>
+      </div>
+      <div class="waterline__foot" data-reveal style="--d:9">
+        <p>Python, Inteligência Artificial na pesquisa e UML. Livros práticos de Marcos Rosa, do primeiro programa ao artigo publicado.</p>
+      </div>
+    </section>
 
+    <!-- A coisa viva: por onde começar -->
+    <section id="comecar" class="start field--paper" aria-labelledby="h-start">
+      <div class="wrap grid start__grid" data-chooser>
+        <div class="start__ask">
+          <h2 id="h-start" class="head" data-reveal>Por onde<br>começar?</h2>
+          <p class="start__intro" data-reveal style="--d:1">Diga o que você quer fazer agora. A gente mostra o livro certo.</p>
+          <a class="pick" href="#python" data-pick="python" aria-pressed="true" aria-controls="ans-python" data-reveal style="--d:2"><span class="pick__dot" aria-hidden="true"></span>Quero aprender a programar do zero</a>
+          <a class="pick" href="#ia" data-pick="ia" aria-pressed="false" aria-controls="ans-ia" data-reveal style="--d:3"><span class="pick__dot" aria-hidden="true"></span>Quero usar IA na minha pesquisa</a>
+          <a class="pick" href="#uml" data-pick="uml" aria-pressed="false" aria-controls="ans-uml" data-reveal style="--d:4"><span class="pick__dot" aria-hidden="true"></span>Quero modelar sistemas com UML</a>
+        </div>
+
+        <div class="start__answers" aria-live="polite">
+          <article class="answer" id="ans-python" data-answer="python">
+            <img class="cover" src="img/capa-python.webp" width="800" height="1200" alt="Capa de Seja Fera em Python, com uma onça-pintada">
+            <div>
+              <h3>Seja Fera em Python</h3>
+              <p>Do ambiente instalado ao programa completo: decisões, repetições, funções, coleções e arquivos, com exercícios e desafios em cada capítulo.</p>
+              <a class="btn btn--ink" href="https://www.amazon.com.br/Seja-fera-Python-Fundamentos-Linguagem-ebook/dp/B0HB7S9XJR/" target="_blank" rel="noopener" data-book="python" data-where="home-chooser">Comprar na Amazon <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="textlink" href="seja-fera-python.html">Conhecer o livro</a>
+            </div>
+          </article>
+          <article class="answer" id="ans-ia" data-answer="ia">
+            <img class="cover" src="img/capa-ia.webp" width="800" height="1200" alt="Capa de IA para Pesquisadores, com uma harpia">
+            <div>
+              <h3>IA para Pesquisadores</h3>
+              <p>Um fluxo completo, do problema de pesquisa à publicação, usando a IA como assistente sem abrir mão do rigor, da ética e da autoria.</p>
+              <a class="btn btn--ink" href="https://www.amazon.com.br/para-Pesquisadores-Intelig%C3%AAncia-Ferramentas-Pesquisador-ebook/dp/B0H4RBWZ6D/" target="_blank" rel="noopener" data-book="ia" data-where="home-chooser">Comprar na Amazon <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="textlink" href="ia-para-pesquisadores.html">Conhecer o livro</a>
+            </div>
+          </article>
+          <article class="answer" id="ans-uml" data-answer="uml">
+            <img class="cover" src="img/capa-uml.webp" width="800" height="1200" alt="Capa de Modelagem de Sistemas com UML e PlantUML, com um tucano">
+            <div>
+              <h3>Modelagem com UML e PlantUML</h3>
+              <p>Casos de uso, classes, atividades e sequência escritos como código, versionados e exportados como diagramas profissionais.</p>
+              <a class="btn btn--ink" href="https://www.amazon.com.br/dp/B0GZLMKFPY" target="_blank" rel="noopener" data-book="uml" data-where="home-chooser">Comprar na Amazon <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="textlink" href="modelagem-uml-plantuml.html">Conhecer o livro</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capítulo amarelo: a onça -->
+    <section id="python" class="field field--onca chapter" aria-labelledby="h-py">
+      <div class="wrap grid ch__grid">
+        <div class="ch__text">
+          <h2 id="h-py" class="head" data-reveal>Seja fera<br>em Python</h2>
+          <p class="lead" data-reveal style="--d:1">Aprender programação não precisa ser complicado.</p>
+          <p class="measure" data-reveal style="--d:2">Os fundamentos da linguagem mais usada em ciência de dados, automação e IA, com linguagem clara e exemplos do cotidiano. Para estudantes, professores, autodidatas e quem está mudando de carreira.</p>
+          <ul class="facts" data-reveal style="--d:3" aria-label="Destaques">
+            <li>Do zero</li><li>13 temas</li><li>Exercícios e desafios</li><li>Boas práticas</li>
+          </ul>
+          <div class="ch__actions" data-reveal style="--d:4">
+            <a class="btn btn--ink" href="https://www.amazon.com.br/Seja-fera-Python-Fundamentos-Linguagem-ebook/dp/B0HB7S9XJR/" target="_blank" rel="noopener" data-book="python" data-where="home-chapter">Comprar na Amazon <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="textlink" href="seja-fera-python.html">Ver tudo o que você aprende</a>
+          </div>
+        </div>
+      </div>
+      <img class="animal animal--multiply onca-img" data-rise src="img/onca.webp" width="665" height="622" alt="" loading="lazy">
+    </section>
+
+    <!-- Capítulo azul: a harpia -->
+    <section id="ia" class="field field--cobalt chapter" aria-labelledby="h-ia">
+      <img class="animal harpia-img" data-rise src="img/harpia.webp" width="614" height="995" alt="" loading="lazy">
+      <div class="wrap grid ch__grid">
+        <div class="ch__text">
+          <h2 id="h-ia" class="head" data-reveal>IA para<br>pesquisadores</h2>
+          <p class="lead" data-reveal style="--d:1">IA como assistente. O pesquisador no controle.</p>
+          <p class="measure" data-reveal style="--d:2">Um guia para ler, escrever e publicar ciência com Inteligência Artificial, de forma crítica, ética e metodologicamente consistente, em dez capítulos.</p>
+          <ol class="route" data-reveal style="--d:3" aria-label="Do problema à publicação">
+            <li>Problema e perguntas</li><li>Introdução científica</li>
+            <li>Revisão de literatura</li><li>Metodologia</li>
+            <li>Resultados e discussão</li><li>Conclusões e publicação</li>
+          </ol>
+          <div class="ch__actions" data-reveal style="--d:4">
+            <a class="btn" href="https://www.amazon.com.br/para-Pesquisadores-Intelig%C3%AAncia-Ferramentas-Pesquisador-ebook/dp/B0H4RBWZ6D/" target="_blank" rel="noopener" data-book="ia" data-where="home-chapter">Comprar na Amazon <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="textlink" href="ia-para-pesquisadores.html">Ver os dez capítulos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capítulo escuro: o tucano -->
+    <section id="uml" class="field field--ink chapter" aria-labelledby="h-uml">
+      <img class="animal tucano-img" data-rise src="img/tucano.webp" width="693" height="627" alt="" loading="lazy">
+      <div class="wrap grid ch__grid">
+        <div class="ch__text">
+          <h2 id="h-uml" class="head" data-reveal>UML escrita<br>como código</h2>
+          <p class="lead" data-reveal style="--d:1">Modelagem de Sistemas com UML e PlantUML.</p>
+          <p class="measure" data-reveal style="--d:2">Da análise de requisitos aos diagramas profissionais: escreva o modelo em texto, versione junto com o projeto e exporte o diagrama pronto.</p>
+        </div>
+<pre class="code" data-reveal style="--d:3" aria-label="Exemplo de código PlantUML"><code><span class="k">@startuml</span>
+
+<span class="k">actor</span> Usuario
+
+<span class="k">rectangle</span> Sistema {
+  Usuario --> <span class="s">(Login)</span>
+  Usuario --> <span class="s">(Consultar dados)</span>
+}
+
+<span class="k">@enduml</span></code></pre>
+        <div class="uml-note" data-reveal style="--d:4">
+          <p>Quatro diagramas, sempre com exemplos em PlantUML: casos de uso, classes, atividades e sequência. Com exercícios resolvidos e referências rápidas.</p>
+          <div class="ch__actions">
+            <a class="btn" href="https://www.amazon.com.br/dp/B0GZLMKFPY" target="_blank" rel="noopener" data-book="uml" data-where="home-chapter">Comprar na Amazon <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="textlink" href="modelagem-uml-plantuml.html">Ver o conteúdo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Autor -->
+    <section id="autor" class="author" aria-labelledby="h-autor">
+      <div class="author__panel">
+        <h2 id="h-autor" class="head" data-reveal>Quem<br>escreve</h2>
+        <div class="author__text">
+          <div data-reveal style="--d:1">
+            <h3>Marcos Rosa</h3>
+            <p>Professor e autor de conteúdos técnicos e educacionais em tecnologia, programação, pesquisa e educação. Escreve para transformar conhecimento técnico e acadêmico em material claro, prático e acessível.</p>
+          </div>
+          <div data-reveal style="--d:2">
+            <h3>Uma fera em cada capa</h3>
+            <p>Cada livro traz um animal da fauna brasileira: a onça-pintada no Python, a harpia na pesquisa com IA e o tucano na modelagem de sistemas.</p>
+          </div>
+        </div>
+        <div class="author__animals" aria-hidden="true">
+          <img src="img/capa-python.webp" width="800" height="1200" alt="" loading="lazy" data-rise>
+          <img src="img/capa-ia.webp" width="800" height="1200" alt="" loading="lazy" data-rise style="transition-delay:90ms">
+          <img src="img/capa-uml.webp" width="800" height="1200" alt="" loading="lazy" data-rise style="transition-delay:180ms">
+        </div>
+      </div>
+    </section>
+
+    <!-- Fecho invertido -->
+    <section class="close field--ink" aria-labelledby="h-close">
+      <div class="wrap">
+        <h2 id="h-close" class="display" data-reveal>Escolha<br>sua fera</h2>
+        <ul class="close__list">
+          <li data-reveal style="--d:1"><a href="https://www.amazon.com.br/Seja-fera-Python-Fundamentos-Linguagem-ebook/dp/B0HB7S9XJR/" target="_blank" rel="noopener" data-book="python" data-where="home-close"><span class="t">Seja Fera em Python</span><span class="go">Comprar na Amazon</span></a></li>
+          <li data-reveal style="--d:2"><a href="https://www.amazon.com.br/para-Pesquisadores-Intelig%C3%AAncia-Ferramentas-Pesquisador-ebook/dp/B0H4RBWZ6D/" target="_blank" rel="noopener" data-book="ia" data-where="home-close"><span class="t">IA para Pesquisadores</span><span class="go">Comprar na Amazon</span></a></li>
+          <li data-reveal style="--d:3"><a href="https://www.amazon.com.br/dp/B0GZLMKFPY" target="_blank" rel="noopener" data-book="uml" data-where="home-close"><span class="t">Modelagem de Sistemas com UML e PlantUML</span><span class="go">Comprar na Amazon</span></a></li>
+        </ul>
+        <p class="close__note small">Os links levam à Amazon Brasil.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="blockmark" aria-label="Marcos Rosa">
+      <span class="c-onca" style="height:78%" aria-hidden="true">M</span>
+      <span class="c-cobalt" style="height:100%" aria-hidden="true">A</span>
+      <span class="c-ink" style="height:66%" aria-hidden="true">R</span>
+      <span class="c-tucano" style="height:88%" aria-hidden="true">C</span>
+      <span class="c-mata" style="height:72%" aria-hidden="true">O</span>
+      <span class="c-cobalt" style="height:94%" aria-hidden="true">S</span>
+      <span class="gap" aria-hidden="true"></span>
+      <span class="c-ink" style="height:84%" aria-hidden="true">R</span>
+      <span class="c-onca" style="height:62%" aria-hidden="true">O</span>
+      <span class="c-tucano" style="height:96%" aria-hidden="true">S</span>
+      <span class="c-mata" style="height:74%" aria-hidden="true">A</span>
     </div>
-  </section>
-
-
-  <section class="about">
-    <div class="container about-content">
-
-      <h2>
-        Conhecimento para aprender, criar e pesquisar.
-      </h2>
-
-      <p>
-        Livros desenvolvidos para transformar conhecimentos técnicos
-        e acadêmicos em materiais claros, práticos e acessíveis.
-      </p>
-
+    <div class="grid footer__cols">
+      <div style="grid-column: span 4">
+        <h2>Livros</h2>
+        <ul>
+          <li><a href="seja-fera-python.html">Seja Fera em Python</a></li>
+          <li><a href="ia-para-pesquisadores.html">IA para Pesquisadores</a></li>
+          <li><a href="modelagem-uml-plantuml.html">Modelagem de Sistemas com UML e PlantUML</a></li>
+        </ul>
+      </div>
+      <div style="grid-column: span 4">
+        <h2>Nesta página</h2>
+        <ul>
+          <li><a href="#comecar">Por onde começar</a></li>
+          <li><a href="#autor">Sobre o autor</a></li>
+        </ul>
+      </div>
+      <div style="grid-column: span 4">
+        <h2>Onde comprar</h2>
+        <ul><li>Amazon Brasil</li></ul>
+      </div>
     </div>
-  </section>
+    <div class="footer__last small">
+      <p>© <span id="ano">2026</span> Marcos Rosa · Livros</p>
+      <a class="btn btn--sm btn--ink" href="#conteudo">Voltar ao topo</a>
+    </div>
+  </footer>
 
-</main>
-
-<footer>
-  <div class="container">
-    © <span id="year"></span> — Livros
-  </div>
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  document.querySelectorAll(".button").forEach(function(link) {
-    link.addEventListener("click", function() {
-      if (typeof gtag === "function") {
-        gtag("event", "book_page_click", {
-          book: this.href.includes("ia-para-pesquisadores")
-            ? "ia_para_pesquisadores"
-            : "seja_fera_em_python"
-        });
-      }
-    });
-  });
-</script>
-
+  <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+  <script src="site.js" defer></script>
 </body>
 </html>
